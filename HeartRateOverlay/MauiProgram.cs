@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using HeartRateOverlay.Abstractions;
+using HeartRateOverlay.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace HeartRateOverlay
 {
@@ -15,8 +17,17 @@ namespace HeartRateOverlay
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+
+            // Registering Platform-Specific Services
+#if ANDROID
+            builder.Services.AddSingleton<IBluetoothService, Platforms.Android.Services.AndroidBluetoothService>();
+            builder.Services.AddSingleton<IOverlayService, Platforms.Android.Services.AndroidOverlayService>();
+#endif
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
