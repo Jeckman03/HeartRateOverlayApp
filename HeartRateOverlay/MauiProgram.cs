@@ -1,4 +1,5 @@
-﻿using HeartRateOverlay.Abstractions;
+﻿using CommunityToolkit.Maui;
+using HeartRateOverlay.Abstractions;
 using HeartRateOverlay.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -11,6 +12,7 @@ namespace HeartRateOverlay
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

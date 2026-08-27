@@ -6,9 +6,13 @@ namespace HeartRateOverlay.Abstractions
 {
     public interface IBluetoothService
     {
-        Task ConnectAsync();
+        Task ConnectToDeviceAsync(string deviceId);
         void Disconnect();
+        void StartScanning();
+        void StopScanning();
+
         event EventHandler<int> HeartRateUpdated;
+        event EventHandler<DiscoveredDevice> DeviceDiscovered;
 
     }
 }

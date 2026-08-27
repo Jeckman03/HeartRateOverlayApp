@@ -1,24 +1,27 @@
-﻿namespace HeartRateOverlay
+﻿using CommunityToolkit.Maui.Extensions;
+using HeartRateOverlay.ViewModels;
+
+namespace HeartRateOverlay
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
-        public MainPage()
+        public MainPage(MainViewModel viewModel)
         {
             InitializeComponent();
+            BindingContext = viewModel;
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void OnSettingsClicked(object sender, EventArgs e)
         {
-            count++;
+            var popup = new SettingsPopup((MainViewModel)BindingContext);
+            this.ShowPopup(popup);
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private void OnHelpClicked(object sender, EventArgs e)
+        {
+            var popup = new HelpPopup((MainViewModel)BindingContext);
+            this.ShowPopup(popup);
         }
     }
 }

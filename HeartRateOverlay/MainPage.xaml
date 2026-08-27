@@ -1,35 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HeartRateOverlay.MainPage">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:HeartRateOverlay.ViewModels"
+             xmlns:abstractions="clr-namespace:HeartRateOverlay.Abstractions"
+             x:Class="HeartRateOverlay.MainPage"
+             x:DataType="viewModels:MainViewModel"
+             Shell.ForegroundColor="{StaticResource NeonBlue}">
+
+    <Shell.TitleView>
+        <Label Text="Heart Rate Overlay" 
+               TextColor="{StaticResource NeonGreen}" 
+               FontSize="20" 
+               FontAttributes="Bold" 
+               VerticalOptions="Center" />
+    </Shell.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ℹ️ Help" Clicked="OnHelpClicked" />
+        <ToolbarItem Text="⚙️ Settings" Clicked="OnSettingsClicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource FightBlack}" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a submarine number ten" />
+        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
 
-            <Label
-                Text="Hello, World!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="Heart Rate Overlay"
+                   TextColor="{StaticResource PureWhite}"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
 
-            <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+            <Label Text="{Binding CurrentHeartRate, StringFormat='{0} BPM'}"
+                   FontSize="48"
+                   TextColor="{StaticResource NeonGreen}"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+            <Button Text="1. Grant Bluetooth Permissions"
+                    Command="{Binding RequestBluetoothPermissionsCommand}"
+                    TextColor="{StaticResource PureWhite}"
+                    BackgroundColor="#2B0B3F"
+                    CornerRadius="8" />
+
+            <Button Text="2. Grant Overlay Permission"
+                    Command="{Binding RequestOverlayPermissionCommand}"
+                    TextColor="{StaticResource PureWhite}"
+                    BackgroundColor="#2B0B3F"
+                    CornerRadius="8" />
+
+            <Button Text="3. Scan for HR Monitors" 
+                    Command="{Binding ScanForDevicesCommand}"
+                    TextColor="{StaticResource FightBlack}"
+                    BackgroundColor="{StaticResource NeonBlue}"
+                    CornerRadius="8"/>
+
+            <!-- The List of Found Devices -->
+            <CollectionView ItemsSource="{Binding Devices}" 
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding ConnectToDeviceCommand}"
+                            SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}"
+                            HeightRequest="150">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="abstractions:DiscoveredDevice">
+                        <Grid Padding="10">
+                            <Border BackgroundColor="#333333">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+                                <Label Text="{Binding Name}" TextColor="White" FontSize="18" HorizontalOptions="Center" Padding="10"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="4. Toggle Overlay"
+                    Command="{Binding ToggleOverlayCommand}"
+                    TextColor="{StaticResource FightBlack}"
+                    BackgroundColor="{StaticResource NeonGreen}"
+                    CornerRadius="8" />
+
         </VerticalStackLayout>
     </ScrollView>
 

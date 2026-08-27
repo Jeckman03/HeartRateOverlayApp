@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:viewmodels="clr-namespace:HeartRateOverlay.ViewModels"
+               xmlns:models="clr-namespace:HeartRateOverlay.Models"
+               x:Class="HeartRateOverlay.HelpPopup"
+               x:DataType="viewmodels:MainViewModel">
+
+    <Border Stroke="{StaticResource NeonGreen}" 
+            StrokeThickness="2" 
+            BackgroundColor="{StaticResource FightSurface}" 
+            Padding="20" 
+            WidthRequest="320"
+            HeightRequest="400">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+        </Border.StrokeShape>
+
+        <Grid RowDefinitions="*, Auto, Auto">
+
+            <!-- The Swipeable Cards -->
+            <CarouselView Grid.Row="0" 
+                          ItemsSource="{Binding Instructions}" 
+                          IndicatorView="Indicator"
+                          Loop="False">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="models:InstructionStep">
+                        <VerticalStackLayout Spacing="20" VerticalOptions="Center" Padding="15">
+                            <Label Text="{Binding Icon}" FontSize="64" HorizontalOptions="Center" />
+                            <Label Text="{Binding Title}" TextColor="{StaticResource PureWhite}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+                            <Label Text="{Binding Description}" TextColor="LightGray" FontSize="14" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <!-- The Progress Dots -->
+            <IndicatorView x:Name="Indicator" 
+                           Grid.Row="1"
+                           IndicatorColor="Gray"
+                           SelectedIndicatorColor="{StaticResource NeonGreen}"
+                           HorizontalOptions="Center"
+                           Margin="0, 15"/>
+
+            <!-- Close Button -->
+            <Button Grid.Row="2"
+                    Text="Got it!" 
+                    BackgroundColor="{StaticResource FightBlack}" 
+                    TextColor="{StaticResource NeonGreen}"
+                    BorderColor="{StaticResource NeonGreen}"
+                    BorderWidth="1"
+                    CornerRadius="8"
+                    Clicked="OnCloseClicked"/>
+        </Grid>
+    </Border>
+</toolkit:Popup>

@@ -9,6 +9,7 @@ namespace HeartRateOverlay.Abstractions
         void StartOverlay();
         void StopOverlay();
         void UpdateHeartRate(int bpm);
+        void CheckOverlayPermission();
 
     }
 }
