@@ -17,14 +17,15 @@ namespace HeartRateOverlay.ViewModels
         public ObservableCollection<DiscoveredDevice> Devices { get; } = new();
         public ObservableCollection<string> Positions { get; } = new() { "Top Right", "Top Left", "Bottom Right", "Bottom Left" };
         public ObservableCollection<string> Colors { get; } = new() { "Red", "Green", "Blue", "White", "Purple", "Grey" };
+        public ObservableCollection<string> Sizes { get; } = new() { "Small", "Medium", "Large", "Extra Large" };
 
         public ObservableCollection<InstructionStep> Instructions { get; } = new()
         {
             new InstructionStep { Icon = "🔓", Title = "1. Permissions", Description = "Tap the gear icon and ensure Bluetooth and 'Display Over Other Apps' permissions are granted." },
             new InstructionStep { Icon = "🫀", Title = "2. Gear Up", Description = "Make sure your heart rate device is turned on and ready to pair." },
             new InstructionStep { Icon = "📡", Title = "3. Lock On", Description = "Tap 'Scan', wait for your heart rate monitor to appear in the list, and tap it to connect." },
-            new InstructionStep { Icon = "👍", Title = "4. Activate Overlay", Description = "Hit 'Toggle Overlay'and you are all set!" },
-            new InstructionStep { Icon = "ℹ️", Title = "5. How To Cast", Description = "When casting your phone, use the main cast button in the top drop-down menu instead of the app's built-in cast button, as some apps will not work otherwise." }
+            new InstructionStep { Icon = "👍", Title = "4. Activate Overlay", Description = "Hit 'Toggle Overlay' and you are all set!" },
+            new InstructionStep { Icon = "ℹ️", Title = "5. How To Cast", Description = "Use the cast button in the top drop-down menu instead of the app's built-in cast button, as some apps will not work otherwise." }
         };
 
         [ObservableProperty]
@@ -38,6 +39,9 @@ namespace HeartRateOverlay.ViewModels
 
         [ObservableProperty]
         private string _selectedColor;
+
+        [ObservableProperty]
+        private string _selectedSize;
 
 
         public MainViewModel(IBluetoothService bluetoothService, IOverlayService overlayService)
@@ -68,6 +72,12 @@ namespace HeartRateOverlay.ViewModels
 
             SelectedPosition = Preferences.Default.Get("OverlayPosition", "Top Right");
             SelectedColor = Preferences.Default.Get("OverlayColor", "Red");
+            SelectedSize = Preferences.Default.Get("OverlaySize", "Medium");
+        }
+
+        partial void OnSelectedSizeChanged(string value)
+        {
+            Preferences.Default.Set("OverlaySize", value);
         }
 
         partial void OnSelectedPositionChanged(string value)

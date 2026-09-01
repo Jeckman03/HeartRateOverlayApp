@@ -33,6 +33,7 @@ namespace HeartRateOverlay.Platforms.Android.Services
             // 1. READ THE SAVED SETTINGS
             string savedColor = Microsoft.Maui.Storage.Preferences.Default.Get("OverlayColor", "Red");
             string savedPosition = Microsoft.Maui.Storage.Preferences.Default.Get("OverlayPosition", "Top Right");
+            string savedSize = Preferences.Default.Get("OverlaySize", "Medium");
 
             // 2. MAP THE COLOR
             var textColor = savedColor switch
@@ -54,6 +55,15 @@ namespace HeartRateOverlay.Platforms.Android.Services
                 _ => GravityFlags.Top | GravityFlags.Right
             };
 
+            // MAP THE SIZE
+            float baseSize = savedSize switch
+            {
+                "Small" => 24f,
+                "Large" => 48f,
+                "Extra Large" => 64f,
+                _ => 36f
+            };
+
             // 4. BUILD THE NEW LAYOUT (Heart + Text)
             var layout = new global::Android.Widget.LinearLayout(context)
             {
@@ -66,7 +76,7 @@ namespace HeartRateOverlay.Platforms.Android.Services
             var heartIcon = new global::Android.Widget.TextView(context)
             {
                 Text = "❤️",
-                TextSize = 34f
+                TextSize = baseSize - 2f
             };
             heartIcon.SetPadding(0, 0, 15, 0); // Add some space between heart and text
 
@@ -74,7 +84,7 @@ namespace HeartRateOverlay.Platforms.Android.Services
             _heartRateText = new global::Android.Widget.TextView(context)
             {
                 Text = "-- BPM",
-                TextSize = 36f
+                TextSize = baseSize
             };
             _heartRateText.SetTextColor(textColor); // Apply user's color!
 

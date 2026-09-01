@@ -15,4 +15,9 @@ public partial class HelpPopup : Popup
     {
 		CloseAsync();
     }
+
+    private async void OnSupportClicked(object sender, EventArgs e)
+    {
+        await Launcher.OpenAsync("https://buymeacoffee.com/eckmanapps");
+    }
 }

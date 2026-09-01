@@ -37,6 +37,13 @@
                     BackgroundColor="{StaticResource FightBlack}"
                     Title="Choose Color" />
 
+            <Label Text="Display Size:" TextColor="{StaticResource PureWhite}" />
+            <Picker ItemsSource="{Binding Sizes}"
+                    SelectedItem="{Binding SelectedSize}"
+                    TextColor="{StaticResource NeonGreen}"
+                    BackgroundColor="{StaticResource FightBlack}"
+                    Title="Choose Size" />
+
             <Button Text="Close" 
                     BackgroundColor="{StaticResource FightBlack}" 
                     TextColor="{StaticResource NeonBlue}"
