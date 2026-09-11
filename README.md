@@ -23,7 +23,7 @@ Designed specifically for athletes, this app connects to your Bluetooth Low Ener
    ```bash
    git clone [https://github.com/jeckman03/HeartRateOverlayApp.git](https://github.com/jeckman03/HeartRateOverlayApp.git)
 
-   About the Developer
+## About the Developer
 Hi, I’m Jeff Eckman, a software engineer specializing in C#, .NET MAUI, ASP.NET Core, and Microsoft Azure. I build high-performance, natively compiled applications with clean MVVM architecture and robust cloud-hosted backends.
 
 This Heart Rate Overlay app was born directly out of my own training routines. Between heavy bag boxing sessions and a 4-day weightlifting split, I needed a no-nonsense, dark-mode tracker that wouldn't interrupt my workout with ads or clunky UI. I build the exact tools I need on the gym floor, which is also why my next release is a dedicated C# Boxing Round Timer.
