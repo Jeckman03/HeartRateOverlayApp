@@ -30,7 +30,7 @@ This Heart Rate Overlay app was born directly out of my own training routines. B
 
 I am currently based in Mesa, Arizona, and actively seeking full-time software engineering opportunities in the Denver, Colorado area. Whether you want to discuss .NET architecture, mobile development, or fitness tech, let's connect!
 
-[Connect on LinkedIn](www.linkedin.com/in/jeff-eckman-b514a111/) 
+[Connect on LinkedIn](https://www.linkedin.com/in/jeff-eckman-b514a111) 
 
 [Support my work on Buy Me a Coffee](https://buymeacoffee.com/eckmanapps)
 
