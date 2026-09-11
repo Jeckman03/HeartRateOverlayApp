@@ -18,6 +18,11 @@ Designed specifically for athletes, this app connects to your Bluetooth Low Ener
 * **State Management:** Native `Preferences` API for persisting user customizations
 * **Target Platform:** Android
 
+* ## Images
+<img width="20%" alt="Screenshot_20260910-142505" src="https://github.com/user-attachments/assets/16a4beb2-67ce-4ab0-ba86-71a84f825c9e" />
+<img width="20%" alt="Screenshot_20260910-142516" src="https://github.com/user-attachments/assets/c8837eb5-2b38-496b-b9b1-7fdbd37e6759" />
+<img width="20%" alt="Screenshot_20260910-142526" src="https://github.com/user-attachments/assets/2e6e360b-08ab-42c4-b545-15f3b339b4bf" />
+
 ## Installation
 1. Clone this repository: 
    ```bash
